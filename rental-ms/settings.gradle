@@ -1,6 +1,6 @@
 rootProject.name = 'rentalms'
-include 'service'
 include 'rental-ms-persistence'
 include 'rental-ms-web'
 include 'rental-ms-application'
+include 'rental-ms-configuration'
 
