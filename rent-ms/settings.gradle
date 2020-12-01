@@ -1,0 +1,4 @@
+include('rent-ms-configuration')
+include('rent-ms-web')
+include('rent-ms-application')
+include('rent-ms-persistence')
