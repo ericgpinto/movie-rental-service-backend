@@ -3,4 +3,5 @@ include 'rental-ms-persistence'
 include 'rental-ms-web'
 include 'rental-ms-application'
 include 'rental-ms-configuration'
+include 'rental-ms-client'
 
