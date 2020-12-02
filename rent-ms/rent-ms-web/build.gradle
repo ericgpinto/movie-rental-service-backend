@@ -1,4 +1,6 @@
 dependencies {
     implementation project(':rent-ms-application')
+    implementation project(':rent-ms-persistence')
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 }
