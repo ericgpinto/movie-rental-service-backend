@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService {
-
     private UserRepository userRepository;
 
     public List<User> findAll(){
