@@ -2,6 +2,7 @@ package com.technocorp.ericpinto.review;
 
 import com.technocorp.ericpinto.review.builder.entity.BankAccount;
 import com.technocorp.ericpinto.review.builder.entity.BankAccountBuilder;
+import com.technocorp.ericpinto.review.builderwithlombok.entity.Child;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,15 +17,28 @@ public class ReviewApplication {
 //
 //		System.out.println(account);
 //		System.out.println(anotherAccount);
+//
+//
+//		//---------------------------------------------------------------
+//
+//
+//		BankAccountBuilder accountBuilder = new BankAccountBuilder.Builder(1234L)
+//				.withOwner("Marge")
+//				.atBranch("Springfield")
+//				.openingBalance(100.00)
+//				.atRate(2.5)
+//				.build();
+//
+//		System.out.println(accountBuilder);
 
-		BankAccountBuilder accountBuilder = new BankAccountBuilder.Builder(1234L)
-				.withOwner("Marge")
-				.atBranch("Springfield")
-				.openingBalance(100.00)
-				.atRate(2.5)
+		Child child = Child.childBuilder()
+				.parentName("Éric")
+				.parentAge(12)
+				.childName("Éric JR")
+				.childAge(5)
 				.build();
 
-		System.out.println(accountBuilder);
+		System.out.println(child);
 	}
 
 }

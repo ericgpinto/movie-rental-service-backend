@@ -42,4 +42,10 @@ public class RentController {
         rentService.update(rent);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(value ="/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        rentService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

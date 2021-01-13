@@ -39,4 +39,9 @@ public class RentService {
         updatedUser.setFinalDate(obj.getFinalDate());
     }
 
+    public void delete(String id){
+        findById(id);
+        rentRepository.deleteById(id);
+    }
+
 }
