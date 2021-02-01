@@ -6,6 +6,7 @@ import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.service.FilmService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,19 @@ public class FilmController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Film getFilmById(@PathVariable Integer id){
-        return filmService.getFilmById(id);
+    public ResponseEntity<Film> getFilmById(@PathVariable Integer id){
+
+        if (id < 0){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Film film = filmService.getFilmById(id);
+
+        if(film == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(film);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -28,6 +40,5 @@ public class FilmController {
     public FilmResponse findAllFilms(){
         return filmService.findAll();
     }
-
 
 }

@@ -2,6 +2,7 @@ package com.technocorp.ericpinto.rentms.service;
 
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.repository.UserRepository;
+import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,8 @@ public class UserService {
         return userRepository.insert(user);
     }
 
+    public User findById(String id) {
+        return userRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("User não encontrado"));
+    }
 
 }

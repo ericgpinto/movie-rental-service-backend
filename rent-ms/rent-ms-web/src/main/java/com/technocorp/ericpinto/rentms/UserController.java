@@ -27,4 +27,13 @@ public class UserController {
         userService.create(user);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<User> findById(@PathVariable String id){
+        User obj = userService.findById(id);
+        if(obj == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(obj);
+    }
 }
