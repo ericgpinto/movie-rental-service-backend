@@ -20,7 +20,7 @@ public class Rent {
     private String id;
     @DBRef
     private User user;
-    private String urlFilm;
+    private Film film;
     private Date initialDate;
     private Date finalDate;
 

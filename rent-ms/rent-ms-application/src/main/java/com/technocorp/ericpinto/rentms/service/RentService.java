@@ -34,7 +34,7 @@ public class RentService {
 
     private void updateData(Rent updatedUser, Rent obj) {
         updatedUser.setUser(obj.getUser());
-        updatedUser.setUrlFilm(obj.getUrlFilm());
+        updatedUser.setFilm(obj.getFilm());
         updatedUser.setInitialDate(obj.getInitialDate());
         updatedUser.setFinalDate(obj.getFinalDate());
     }

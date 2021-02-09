@@ -28,10 +28,9 @@ allprojects {
 
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-web'
-		testImplementation('org.springframework.boot:spring-boot-starter-test') {
-			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-		}
-		testImplementation 'org.mockito:mockito-junit-jupiter'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+		testImplementation 'org.junit.jupiter:junit-jupiter-api'
 		testImplementation 'io.rest-assured:spring-mock-mvc'
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 		compileOnly 'org.projectlombok:lombok'
@@ -40,6 +39,9 @@ allprojects {
 
 	test{
 		useJUnitPlatform()
+		testLogging{
+			events "passed", "skipped", "failed"
+		}
 	}
 
 
