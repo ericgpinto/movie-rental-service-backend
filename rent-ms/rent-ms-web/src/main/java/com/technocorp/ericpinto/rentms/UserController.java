@@ -33,9 +33,26 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findById(@PathVariable String id){
         User obj = userService.findById(id);
-        if(obj == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value ="/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteMany(@RequestParam List<String> ids){
+        ids.stream().forEach(x -> userService.delete(x));
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value ="/{id}")
+    public ResponseEntity<Void> update(@RequestBody User user, @PathVariable String id){
+        User obj = userService.fromUser(user);
+        obj.setId(id);
+        obj = userService.update(obj);
+        return ResponseEntity.noContent().build();
     }
 }

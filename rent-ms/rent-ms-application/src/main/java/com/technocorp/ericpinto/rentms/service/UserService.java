@@ -25,4 +25,27 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("User não encontrado"));
     }
 
+    public void delete(String id){
+        findById(id);
+        userRepository.deleteById(id);
+    }
+
+    public User update(User obj){
+        User updatedUser = findById(obj.getId());
+        updateData(updatedUser, obj);
+        return userRepository.save(updatedUser);
+    }
+
+    private void updateData(User updatedUser, User obj) {
+
+        updatedUser.setName(obj.getName());
+        updatedUser.setEmail(obj.getEmail());
+    }
+
+    public User fromUser(User user) {
+        return User.builder()
+                .id(user.getId()).name(user.getName()).email(user.getEmail())
+                .build();
+    }
+
 }
