@@ -4,6 +4,7 @@ import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,10 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user){
-        userService.create(user);
-        return ResponseEntity.ok(user);
+    @ResponseStatus(HttpStatus.CREATED)
+    public User create(@RequestBody User user){
+        User objUser = userService.create(user);
+        return objUser;
     }
 
     @GetMapping(value = "/{id}")
