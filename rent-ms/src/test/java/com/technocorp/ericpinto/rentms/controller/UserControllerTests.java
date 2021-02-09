@@ -26,7 +26,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = UserController.class)
@@ -99,6 +98,5 @@ public class UserControllerTests {
                 .andExpect(jsonPath("$.name", is("Éric")))
                 .andExpect(jsonPath("$.email", is("eric@gmail.com")));
     }
-
 
 }
