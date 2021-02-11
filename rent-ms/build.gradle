@@ -8,6 +8,7 @@ dependencies {
 	implementation project(':rent-ms-application')
 	implementation project(':rent-ms-persistence')
 	implementation project(':rent-ms-web')
+	implementation project(':rent-ms-configuration')
 }
 
 allprojects {
@@ -35,6 +36,8 @@ allprojects {
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
+		implementation 'io.springfox:springfox-swagger2:2.9.2'
+		implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	}
 
 	test{

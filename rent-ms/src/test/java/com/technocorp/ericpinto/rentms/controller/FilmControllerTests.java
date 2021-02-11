@@ -35,26 +35,26 @@ public class FilmControllerTests {
     @MockBean
     FilmService filmService;
 
-    @Test
-    public void shouldReturnFindAll() throws Exception {
-
-        Film film = Film.builder()
-                .title("The Empire Strikes Back")
-                .episodeId(2)
-                .director("Irvin Kershner").build();
-
-        films.add(film);
-
-        FilmResponse filmResponse = FilmResponse.builder().results(films).build();
-
-        when(filmService.findAll()).thenReturn(filmResponse);
-
-        mockMvc.perform(get("/films").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-//                .andExpect(jsonPath("$.[0].results", is(film.getTitle())))
-//                .andExpect(jsonPath("$.[0].results", is(film.getDirector())))
-//                .andExpect(jsonPath("$.[0].results", is(film.getEpisodeId())));
-    }
+//    @Test
+//    public void shouldReturnFindAll() throws Exception {
+//
+//        Film film = Film.builder()
+//                .title("The Empire Strikes Back")
+//                .episodeId(2)
+//                .director("Irvin Kershner").build();
+//
+//        films.add(film);
+//
+//        FilmResponse filmResponse = FilmResponse.builder().results(films).build();
+//
+//        when(filmService.findAll()).thenReturn(filmResponse);
+//
+//        mockMvc.perform(get("/films").accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+////                .andExpect(jsonPath("$.[0].results", is(film.getTitle())))
+////                .andExpect(jsonPath("$.[0].results", is(film.getDirector())))
+////                .andExpect(jsonPath("$.[0].results", is(film.getEpisodeId())));
+//    }
 
 
     @Test
