@@ -18,5 +18,4 @@ public interface FilmService {
 
     @RequestMapping(value = "/films/", method = RequestMethod.GET)
     FilmResponse findAll();
-
 }

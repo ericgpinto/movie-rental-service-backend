@@ -1,6 +1,8 @@
 package com.technocorp.ericpinto.rentms.service;
 
+import com.technocorp.ericpinto.rentms.model.Film;
 import com.technocorp.ericpinto.rentms.model.Rent;
+import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.repository.RentRepository;
 import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
@@ -13,8 +15,10 @@ import java.util.List;
 public class RentService {
 
     private RentRepository rentRepository;
+    private FilmService filmService;
 
-    public Rent create(Rent rent){
+    public Rent create(Rent rent, Integer id){
+        rent.setFilm(filmService.getFilmById(id));
         return rentRepository.insert(rent);
     }
 

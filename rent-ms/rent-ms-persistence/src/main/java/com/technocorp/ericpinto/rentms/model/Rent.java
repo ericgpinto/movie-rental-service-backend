@@ -24,5 +24,4 @@ public class Rent {
     private Date initialDate;
     private Date finalDate;
 
-
 }

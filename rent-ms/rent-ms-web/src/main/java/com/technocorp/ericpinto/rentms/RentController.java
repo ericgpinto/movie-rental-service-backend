@@ -29,9 +29,9 @@ public class RentController {
         return ResponseEntity.ok(rent);
     }
 
-    @PostMapping
-    public ResponseEntity<Rent> create(@RequestBody Rent rent){
-        rentService.create(rent);
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<Rent> create(@RequestBody Rent rent, @PathVariable Integer id){
+        rentService.create(rent, id);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(rent.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
