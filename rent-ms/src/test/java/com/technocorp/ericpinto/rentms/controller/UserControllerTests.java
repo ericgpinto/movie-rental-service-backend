@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 
 import org.mockito.ArgumentCaptor;
-import org.mockito.exceptions.base.MockitoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -50,7 +49,7 @@ public class UserControllerTests {
 
         when(userService.findAll()).thenReturn(users);
 
-        mockMvc.perform(get("/users").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/rentapi/users").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.[0].id", is("5fc7ba0ee7e48d20dc2fbf52")))
                 .andExpect(jsonPath("$.[0].name", is("Éric")))
@@ -67,7 +66,7 @@ public class UserControllerTests {
         users.add(firstUser);
 
         when(userService.create(any())).thenReturn(firstUser);
-        mockMvc.perform(post("/users")
+        mockMvc.perform(post("/rentapi/users")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Éric\",\"email\":\"eric@gmail.com\"}"))
@@ -92,7 +91,7 @@ public class UserControllerTests {
         users.add(firstUser);
 
         when(userService.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(firstUser);
-        mockMvc.perform(get("/users/{id}", "5fc7ba0ee7e48d20dc2fbf52").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/rentapi/users/{id}", "5fc7ba0ee7e48d20dc2fbf52").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is("5fc7ba0ee7e48d20dc2fbf52")))
                 .andExpect(jsonPath("$.name", is("Éric")))

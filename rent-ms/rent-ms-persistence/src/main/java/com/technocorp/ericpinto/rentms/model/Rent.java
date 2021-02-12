@@ -1,5 +1,6 @@
 package com.technocorp.ericpinto.rentms.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,11 +18,16 @@ import java.util.Date;
 public class Rent {
 
     @Id
+    @ApiModelProperty(value = "id of rent")
     private String id;
     @DBRef
+    @ApiModelProperty(value = "user of rent ")
     private User user;
+    @ApiModelProperty(value = "rented movie")
     private Film film;
+    @ApiModelProperty(value = "rent start date")
     private Date initialDate;
+    @ApiModelProperty(value = "rent end date")
     private Date finalDate;
 
 }

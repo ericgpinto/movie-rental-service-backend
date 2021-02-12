@@ -2,7 +2,6 @@ package com.technocorp.ericpinto.rentms.controller;
 
 import com.technocorp.ericpinto.rentms.FilmController;
 import com.technocorp.ericpinto.rentms.model.Film;
-import com.technocorp.ericpinto.rentms.model.FilmResponse;
 import com.technocorp.ericpinto.rentms.service.FilmService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,28 +32,6 @@ public class FilmControllerTests {
 
     @MockBean
     FilmService filmService;
-
-//    @Test
-//    public void shouldReturnFindAll() throws Exception {
-//
-//        Film film = Film.builder()
-//                .title("The Empire Strikes Back")
-//                .episodeId(2)
-//                .director("Irvin Kershner").build();
-//
-//        films.add(film);
-//
-//        FilmResponse filmResponse = FilmResponse.builder().results(films).build();
-//
-//        when(filmService.findAll()).thenReturn(filmResponse);
-//
-//        mockMvc.perform(get("/films").accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk());
-////                .andExpect(jsonPath("$.[0].results", is(film.getTitle())))
-////                .andExpect(jsonPath("$.[0].results", is(film.getDirector())))
-////                .andExpect(jsonPath("$.[0].results", is(film.getEpisodeId())));
-//    }
-
 
     @Test
     public void findById_shouldReturnAllUsers() throws Exception {

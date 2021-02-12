@@ -44,7 +44,6 @@ public class UserServiceTests {
 
     @Test
     public void whenCreate_thenReturnUser(){
-      //  when(userRepository.save(user)).thenReturn(user);
         assertThat(userService.create(user)).isEqualTo(user);
     }
 

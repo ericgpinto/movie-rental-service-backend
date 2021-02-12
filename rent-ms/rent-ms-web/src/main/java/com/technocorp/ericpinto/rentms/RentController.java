@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("apirent/rents")
+@RequestMapping("rentapi/rents")
 @Api(value = "API REST Rents")
 @AllArgsConstructor
 
