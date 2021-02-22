@@ -26,6 +26,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserController.class)
@@ -46,6 +47,21 @@ public class UserControllerTests {
             .id("5fc7ba0ee7e48d20dc2fbf52")
             .name("Éric")
             .email("eric@gmail.com").build();
+
+    @Test
+    @DisplayName("Should be save a user")
+    public void shouldReturn201_WhenSaveAUser() throws Exception {
+        when(userService.create(user)).thenReturn(user);
+
+        this.mockMvc.perform(post("/rentapi/users")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isCreated())
+                .andDo(document("{methodName}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
 
     @Test
     @DisplayName("Should be return all users")
