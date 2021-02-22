@@ -42,32 +42,26 @@ public class UserServiceTests {
                 .build();
     }
 
-    @Test
-    public void whenCreate_thenReturnUser(){
-        assertThat(userService.create(user)).isEqualTo(user);
-    }
-
-    @Test
-    public void whenFindAll_thenReturnUserList() {
-
-        List<User> expectedUsers = new ArrayList<>();
-        expectedUsers.add(this.user);
-
-        when(userRepository.findAll()).thenReturn(expectedUsers);
-
-        var response = userRepository.findAll();
-
-        assertThat(response).isEqualTo(expectedUsers);
-    }
+//    @Test
+//    public void whenCreate_thenReturnUser(){
+//        assertThat(userService.create(user)).isEqualTo(user);
+//    }
+//
+//    @Test
+//    public void whenFindAll_thenReturnUserList() {
+//
+//        List<User> expectedUsers = new ArrayList<>();
+//        expectedUsers.add(this.user);
+//
+//        when(userRepository.findAll()).thenReturn(expectedUsers);
+//
+//        var response = userRepository.findAll();
+//
+//        assertThat(response).isEqualTo(expectedUsers);
+//    }
 
     @Test
     public void whenFindById_thenReturnUser() {
-
-        User user = User.builder()
-                .id("5fc7ba0ee7e48d20dc2fbf52")
-                .name("Éric Pinto")
-                .email("ericgrandopinto@gmail.com")
-                .build();
 
         when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(user));
 

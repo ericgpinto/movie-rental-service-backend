@@ -3,8 +3,7 @@ package com.technocorp.ericpinto.rentms.controller;
 import com.technocorp.ericpinto.rentms.FilmController;
 import com.technocorp.ericpinto.rentms.model.Film;
 import com.technocorp.ericpinto.rentms.service.FilmService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(controllers = FilmController.class)
 public class FilmControllerTests {
 
