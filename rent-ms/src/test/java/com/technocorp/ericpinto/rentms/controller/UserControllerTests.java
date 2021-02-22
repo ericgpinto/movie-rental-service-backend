@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technocorp.ericpinto.rentms.UserController;
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,14 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -111,6 +106,16 @@ public class UserControllerTests {
                 .andDo(document("{methodName}",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("Should be delete a user")
+    public void shouldReturn204_WhenDeleteUser() throws Exception {
+        this.mockMvc.perform(delete("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52"))
+                .andExpect(status().isNoContent())
+                .andDo(document("{methodName}",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())));
     }
 
 }
