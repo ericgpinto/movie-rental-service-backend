@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<User> findAll(){
         return userRepository.findAll();
@@ -30,22 +30,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User update(User obj){
-        User updatedUser = findById(obj.getId());
-        updateData(updatedUser, obj);
-        return userRepository.save(updatedUser);
+    public User udpated(String id, User user){
+        User obj = findById(id);
+
+        obj.setName(user.getName());
+        obj.setEmail(user.getEmail());
+
+        return userRepository.save(obj);
     }
-
-    private void updateData(User updatedUser, User obj) {
-
-        updatedUser.setName(obj.getName());
-        updatedUser.setEmail(obj.getEmail());
-    }
-
-    public User fromUser(User user) {
-        return User.builder()
-                .id(user.getId()).name(user.getName()).email(user.getEmail())
-                .build();
-    }
-
 }

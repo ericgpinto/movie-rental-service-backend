@@ -41,8 +41,7 @@ public class UserController {
             @ApiResponse(code = 500, message = "Internal error")
     })
     public User create(@RequestBody User user){
-        User objUser = userService.create(user);
-        return objUser;
+        return userService.create(user);
     }
 
     @GetMapping(value = "/{id}")
@@ -91,10 +90,8 @@ public class UserController {
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Internal error")
     })
-    public ResponseEntity<Void> update(@RequestBody User user, @PathVariable String id){
-        User obj = userService.fromUser(user);
-        obj.setId(id);
-        obj = userService.update(obj);
+    public ResponseEntity<User> update(@RequestBody User user, @PathVariable String id){
+        userService.udpated(id, user);
         return ResponseEntity.noContent().build();
     }
 }
