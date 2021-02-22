@@ -62,7 +62,6 @@ public class UserControllerTests {
                         preprocessResponse(prettyPrint())));
     }
 
-
     @Test
     @DisplayName("Should be return all users")
     public void findAllShouldReturnListOfUsers() throws Exception {
@@ -77,6 +76,20 @@ public class UserControllerTests {
                 .andDo(document("{methodName}",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("Should be return a user by id")
+    public void shouldReturn200_WhenFindUserById() throws Exception {
+        when(userService.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(user);
+
+        this.mockMvc.perform(get("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user))
+        ).andExpect(status().isOk())
+                .andDo(document("{methodName}",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint())));
     }
 
 }
