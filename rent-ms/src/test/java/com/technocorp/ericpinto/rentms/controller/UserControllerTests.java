@@ -25,15 +25,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserController.class)
 @AutoConfigureRestDocs(outputDir = "build/snippets")
 public class UserControllerTests {
-
-    List<User> users = new ArrayList<>();
 
     @MockBean
     private UserService userService;
@@ -65,12 +62,14 @@ public class UserControllerTests {
     @Test
     @DisplayName("Should be return all users")
     public void findAllShouldReturnListOfUsers() throws Exception {
-        users.add(user);
 
-        when(userService.findAll()).thenReturn(users);
+        List<User> listUsers = new ArrayList<>();
+        listUsers.add(user);
+
+        when(userService.findAll()).thenReturn(listUsers);
 
         mockMvc.perform(get("/rentapi/users").contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString(users)))
+                .content(objectMapper.writeValueAsString(listUsers)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andDo(document("{methodName}",
@@ -90,6 +89,28 @@ public class UserControllerTests {
                 .andDo(document("{methodName}",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("Should be update a user")
+    public void shouldReturn204_WhenUpdateUser() throws Exception {
+
+        User newUser = User.builder()
+                .id("5fc7ba0ee7e48d20dc2fbf52")
+                .name("Éric Pinto")
+                .email("ericpinto@gmail.com").build();
+
+        when(userService.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(user);
+        when(userService.udpated("5fc7ba0ee7e48d20dc2fbf52", newUser)).thenReturn(user);
+
+        this.mockMvc.perform(put("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isNoContent())
+                .andDo(document("{methodName}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
     }
 
 }
