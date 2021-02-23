@@ -1,3 +1,7 @@
+plugins{
+    id 'jacoco'
+}
+
 dependencies {
     implementation project(':rent-ms-persistence')
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'

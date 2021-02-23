@@ -4,6 +4,26 @@ plugins {
 	id 'java'
 	id 'org.asciidoctor.convert' version "1.5.9.2"
 	id "org.sonarqube" version "3.0"
+	id 'jacoco'
+}
+
+tasks.register("codeCoverageReport", JacocoReport) {
+	subprojects { subproject ->
+		subproject.plugins.withType(JacocoPlugin).configureEach {
+			subproject.tasks.matching({ t -> t.extensions.findByType(JacocoTaskExtension) }).configureEach { testTask ->
+				sourceSets subproject.sourceSets.main
+				executionData(testTask)
+			}
+
+			subproject.tasks.matching({ t -> t.extensions.findByType(JacocoTaskExtension) }).forEach {
+				rootProject.tasks.codeCoverageReport.dependsOn(it)
+			}
+		}
+	}
+	reports {
+		xml.enabled true
+		html.enabled true
+	}
 }
 
 dependencies {
@@ -33,57 +53,64 @@ test {
 	useJUnitPlatform()
 }
 
-
-allprojects {
-
-	group = 'com.technocorp.ericpinto.rentms'
-	version = '0.0.1-SNAPSHOT'
-
-	apply plugin: 'java'
-	apply plugin: 'io.spring.dependency-management'
-	apply plugin: 'java-library'
-
-	repositories {
-		mavenCentral()
-		maven { url 'https://repo.spring.io/milestone' }
+sonarqube {
+	properties {
+		property 'sonar.host.url', 'http://localhost:9000/'
+		property 'sonar.login', 'admin'
+		property 'sonar.password', 'eric12345'
+		property 'sonar.coverage.exclusions', [
+				'rent-ms-configuration/src/main/java/com/technocorp/ericpinto/rentms/config/SwaggerConfig.java']
 	}
 
-	ext {
-		set('springCloudVersion', "2020.0.0-M5")
-	}
+	allprojects {
 
-	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-web'
-		implementation 'org.springframework.boot:spring-boot-starter-data-mongodb';
-		implementation 'io.springfox:springfox-swagger2:2.9.2'
-		implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-		testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-		testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
-		testImplementation('org.springframework.boot:spring-boot-starter-test') {
-			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		group = 'com.technocorp.ericpinto.rentms'
+		version = '0.0.1-SNAPSHOT'
+
+		apply plugin: 'java'
+		apply plugin: 'io.spring.dependency-management'
+		apply plugin: 'java-library'
+
+		repositories {
+			mavenCentral()
+			maven { url 'https://repo.spring.io/milestone' }
 		}
-		implementation 'org.springframework.boot:spring-boot-starter'
-		compileOnly 'org.projectlombok:lombok:1.18.16'
-		annotationProcessor 'org.projectlombok:lombok'
 
-	}
+		ext {
+			set('springCloudVersion', "2020.0.0-M5")
+		}
 
-	test{
-		useJUnitPlatform()
-		testLogging{
-			events "passed", "skipped", "failed"
+		dependencies {
+			implementation 'org.springframework.boot:spring-boot-starter-web'
+			implementation 'org.springframework.boot:spring-boot-starter-data-mongodb';
+			implementation 'io.springfox:springfox-swagger2:2.9.2'
+			implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+			implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+			testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+			testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+			testImplementation('org.springframework.boot:spring-boot-starter-test') {
+				exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+			}
+			implementation 'org.springframework.boot:spring-boot-starter'
+			compileOnly 'org.projectlombok:lombok:1.18.16'
+			annotationProcessor 'org.projectlombok:lombok'
+
+		}
+
+		test {
+			useJUnitPlatform()
+			testLogging {
+				events "passed", "skipped", "failed"
+			}
+		}
+
+
+		dependencyManagement {
+			imports {
+				mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.0")
+				mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+			}
 		}
 	}
 
-
-	dependencyManagement {
-		imports {
-			mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.0")
-			mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-		}
-	}
 }
-
-
-

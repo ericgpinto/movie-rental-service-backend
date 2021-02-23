@@ -51,16 +51,16 @@ public class RentServiceTests {
         assertEquals(1, listRents.size(), "find all should return one rent");
     }
 
-    @Test
-    @DisplayName("Should be create a Rent")
-    void shouldCreateARent(){
-        when(rentRepository.insert(rent)).thenReturn(rent);
-
-        var response = rentService.create(rent, 6);
-        var stubExpect = rent;
-
-        assertEquals(stubExpect, response);
-    }
+//    @Test
+//    @DisplayName("Should be create a Rent")
+//    void shouldCreateARent(){
+//        when(rentRepository.insert(rent)).thenReturn(rent);
+//
+//        var response = rentService.create(rent, 6);
+//        var stubExpect = rent;
+//
+//        assertEquals(stubExpect, response);
+//    }
 
     @Test
     @DisplayName("Test findById success")

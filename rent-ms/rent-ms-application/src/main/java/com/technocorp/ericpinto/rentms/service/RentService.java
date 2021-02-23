@@ -1,8 +1,6 @@
 package com.technocorp.ericpinto.rentms.service;
 
-import com.technocorp.ericpinto.rentms.model.Film;
 import com.technocorp.ericpinto.rentms.model.Rent;
-import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.repository.RentRepository;
 import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
