@@ -22,8 +22,8 @@ public class Rent {
     @Id
     @ApiModelProperty(value = "id of rent")
     private String id;
-    @DBRef
     @ApiModelProperty(value = "user of rent ")
+    @DBRef
     private User user;
     @ApiModelProperty(value = "rented movie")
     private Film film;

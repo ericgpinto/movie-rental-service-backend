@@ -8,17 +8,20 @@ import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundExceptio
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class RentService {
 
-    private RentRepository rentRepository;
-    private FilmService filmService;
+    private final RentRepository rentRepository;
+    private final FilmService filmService;
 
-    public Rent create(Rent rent, Integer id){
-        rent.setFilm(filmService.getFilmById(id));
+    public Rent create(Rent rent, Integer idFilm){
+        rent.setFilm(filmService.getFilmById(idFilm));
+        rent.setInitialDate(LocalDateTime.now());
+        rent.setFinalDate(LocalDateTime.now().plusDays(2));
         return rentRepository.insert(rent);
     }
 
@@ -30,22 +33,19 @@ public class RentService {
         return rentRepository.findById(id).orElseThrow(()-> new ObjectNotFoundException("Locação não encontrada"));
     }
 
-    public Rent update(Rent obj){
-        Rent updatedRent = findById(obj.getId());
-        updateData(updatedRent, obj);
-        return rentRepository.save(updatedRent);
-    }
-
-    private void updateData(Rent updatedUser, Rent obj) {
-        updatedUser.setUser(obj.getUser());
-        updatedUser.setFilm(obj.getFilm());
-        updatedUser.setInitialDate(obj.getInitialDate());
-        updatedUser.setFinalDate(obj.getFinalDate());
-    }
-
     public void delete(String id){
         findById(id);
         rentRepository.deleteById(id);
+    }
+
+    public Rent udpate(String id, Rent rent, Integer idFilm){
+        Rent obj = findById(id);
+        obj.setUser(rent.getUser());
+        obj.setFilm(filmService.getFilmById(idFilm));
+        obj.setInitialDate(LocalDateTime.now());
+        obj.setFinalDate(LocalDateTime.now().plusDays(2));
+
+        return rentRepository.save(obj);
     }
 
 }

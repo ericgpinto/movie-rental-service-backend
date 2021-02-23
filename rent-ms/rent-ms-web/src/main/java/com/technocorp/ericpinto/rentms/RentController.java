@@ -66,12 +66,10 @@ public class RentController {
             @ApiResponse(code = 404, message = "Rent not found"),
             @ApiResponse(code = 500, message = "Internal error")
     })
-    public ResponseEntity<Void> update(@RequestBody Rent rent, @PathVariable String id){
-        rent.setId(id);
-        rentService.update(rent);
+    public ResponseEntity<Rent> update(@RequestBody Rent rent, @PathVariable String id, @RequestParam Integer idFilm){
+        rentService.udpate(id, rent, idFilm);
         return ResponseEntity.noContent().build();
     }
-
     @DeleteMapping(value ="/{id}")
     @ApiOperation("Deletes a rent by id")
     @ApiResponses(value = {
