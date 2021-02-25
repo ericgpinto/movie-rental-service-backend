@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = UserController.class)
 @AutoConfigureRestDocs(outputDir = "build/snippets")
-public class UserControllerTests {
+class UserControllerTests {
 
     @MockBean
     private UserService userService;
@@ -42,7 +42,7 @@ public class UserControllerTests {
 
     @Test
     @DisplayName("Should be save a user")
-    public void shouldReturn201_WhenSaveAUser() throws Exception {
+    void shouldReturn201_WhenSaveAUser() throws Exception {
         when(userService.create(user)).thenReturn(user);
 
         this.mockMvc.perform(post("/rentapi/users")
@@ -56,7 +56,7 @@ public class UserControllerTests {
 
     @Test
     @DisplayName("Should be return all users")
-    public void findAllShouldReturnListOfUsers() throws Exception {
+    void findAllShouldReturnListOfUsers() throws Exception {
 
         List<User> listUsers = new ArrayList<>();
         listUsers.add(user);
@@ -74,7 +74,7 @@ public class UserControllerTests {
 
     @Test
     @DisplayName("Should be return a user by id")
-    public void shouldReturn200_WhenFindUserById() throws Exception {
+    void shouldReturn200_WhenFindUserById() throws Exception {
         when(userService.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(user);
 
         this.mockMvc.perform(get("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52")
@@ -88,7 +88,7 @@ public class UserControllerTests {
 
     @Test
     @DisplayName("Should be update a user")
-    public void shouldReturn204_WhenUpdateUser() throws Exception {
+    void shouldReturn204_WhenUpdateUser() throws Exception {
 
         User newUser = User.builder()
                 .id("5fc7ba0ee7e48d20dc2fbf52")
@@ -110,7 +110,7 @@ public class UserControllerTests {
 
     @Test
     @DisplayName("Should be delete a user")
-    public void shouldReturn204_WhenDeleteUser() throws Exception {
+    void shouldReturn204_WhenDeleteUser() throws Exception {
         this.mockMvc.perform(delete("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52"))
                 .andExpect(status().isNoContent())
                 .andDo(document("{methodName}",

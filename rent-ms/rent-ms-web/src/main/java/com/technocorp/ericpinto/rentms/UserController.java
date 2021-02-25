@@ -78,7 +78,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "User not found")
     })
     public ResponseEntity<Void> deleteMany(@RequestParam List<String> ids){
-        ids.stream().forEach(x -> userService.delete(x));
+        ids.forEach(userService::delete);
         return ResponseEntity.noContent().build();
     }
 

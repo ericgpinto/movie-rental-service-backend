@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class RentServiceTests {
+class RentServiceTests {
 
     @Mock
     RentRepository rentRepository;
@@ -89,7 +89,6 @@ public class RentServiceTests {
 //
 //        assertEquals(stubExpect, response);
 //    }
-
 
     @Test
     @DisplayName("Shold be delete a rent")

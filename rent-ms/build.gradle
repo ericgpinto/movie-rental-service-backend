@@ -59,7 +59,9 @@ sonarqube {
 		property 'sonar.login', 'admin'
 		property 'sonar.password', 'eric12345'
 		property 'sonar.coverage.exclusions', [
-				'rent-ms-configuration/src/main/java/com/technocorp/ericpinto/rentms/config/SwaggerConfig.java']
+				'rent-ms-configuration/src/main/java/com/technocorp/ericpinto/rentms/config/SwaggerConfig.java',
+				'src/main/java/com/technocorp/ericpinto/rentms/RentMsApplication.java'
+		]
 	}
 
 	allprojects {

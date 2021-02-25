@@ -21,7 +21,7 @@ public class FilmController {
     private final FilmService filmService;
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ApiOperation("Returns a film by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns success"),
