@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,28 +35,27 @@ public class RentController {
     }
 
     @GetMapping(value ="/{id}")
+    @ResponseStatus(HttpStatus.OK)
     @ApiOperation("Returns a user by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns success"),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 404, message = "Rent not found")
     })
-    public ResponseEntity<Rent> findById(@PathVariable String id){
-        Rent rent = rentService.findById(id);
-        return ResponseEntity.ok(rent);
+    public Rent findById(@PathVariable String id){
+        return rentService.findById(id);
     }
 
     @PostMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Creates a rent")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Returns create"),
             @ApiResponse(code = 401, message = "Unauthorized"),
             @ApiResponse(code = 500, message = "Internal error")
     })
-    public ResponseEntity<Rent> create(@RequestBody Rent rent, @PathVariable Integer id){
-        rentService.create(rent, id);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(rent.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+    public Rent create(@RequestBody Rent rent, @PathVariable Integer id){
+        return rentService.create(rent, id);
     }
 
     @PutMapping(value ="/{id}")
@@ -66,11 +66,11 @@ public class RentController {
             @ApiResponse(code = 404, message = "Rent not found"),
             @ApiResponse(code = 500, message = "Internal error")
     })
-    public ResponseEntity<Rent> update(@RequestBody Rent rent, @PathVariable String id, @RequestParam Integer idFilm){
-        rentService.udpate(id, rent, idFilm);
-        return ResponseEntity.noContent().build();
+    public Rent update(@PathVariable String id, @RequestBody Rent rent, @RequestParam Integer idFilm){
+        return rentService.udpate(id, rent, idFilm);
     }
     @DeleteMapping(value ="/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation("Deletes a rent by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns success"),
@@ -78,8 +78,7 @@ public class RentController {
             @ApiResponse(code = 204, message = "No content"),
             @ApiResponse(code = 404, message = "Rent not found")
     })
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public void delete(@PathVariable String id){
         rentService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
