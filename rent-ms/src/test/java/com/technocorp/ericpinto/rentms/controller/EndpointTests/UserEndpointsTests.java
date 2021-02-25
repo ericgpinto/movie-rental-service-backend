@@ -88,7 +88,7 @@ class UserEndpointsTests {
 
     @Test
     @DisplayName("Should be update a user")
-    void shouldReturn204_WhenUpdateUser() throws Exception {
+    void shouldReturn200_WhenUpdateUser() throws Exception {
 
         User newUser = User.builder()
                 .id("5fc7ba0ee7e48d20dc2fbf52")
@@ -102,7 +102,7 @@ class UserEndpointsTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isNoContent())
+                .andExpect(status().isOk())
                 .andDo(document("{methodName}",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
