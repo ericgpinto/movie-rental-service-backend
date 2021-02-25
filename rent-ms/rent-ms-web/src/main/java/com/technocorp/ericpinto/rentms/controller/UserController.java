@@ -57,6 +57,7 @@ public class UserController {
     }
 
     @DeleteMapping(value ="/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation("Deletes a user by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns success"),
@@ -64,12 +65,12 @@ public class UserController {
             @ApiResponse(code = 204, message = "No content"),
             @ApiResponse(code = 404, message = "User not found")
     })
-    public ResponseEntity<Void> delete(@PathVariable String id){
+    public void delete(@PathVariable String id){
         userService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation("Deletes many users")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns success"),
@@ -77,9 +78,8 @@ public class UserController {
             @ApiResponse(code = 204, message = "No content"),
             @ApiResponse(code = 404, message = "User not found")
     })
-    public ResponseEntity<Void> deleteMany(@RequestParam List<String> ids){
+    public void deleteMany(@RequestParam List<String> ids){
         ids.forEach(userService::delete);
-        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value ="/{id}")
