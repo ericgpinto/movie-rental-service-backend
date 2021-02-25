@@ -28,19 +28,8 @@ public class FilmController {
             @ApiResponse(code = 400, message = "Bad request"),
             @ApiResponse(code = 401, message = "Unauthorized")
     })
-    public ResponseEntity<Film> getFilmById(@PathVariable Integer id){
-
-        if (id < 0){
-            return ResponseEntity.badRequest().build();
-        }
-
-        Film film = filmService.getFilmById(id);
-
-        if(film == null){
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(film);
+    public Film getFilmById(@PathVariable Integer id){
+        return filmService.getFilmById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
