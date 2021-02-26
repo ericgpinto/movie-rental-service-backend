@@ -1,9 +1,11 @@
 package com.technocorp.ericpinto.rentms.controller;
 
-import com.technocorp.ericpinto.rentms.controller.model.Film;
-import com.technocorp.ericpinto.rentms.controller.model.Rent;
-import com.technocorp.ericpinto.rentms.controller.model.User;
-import com.technocorp.ericpinto.rentms.controller.service.RentService;
+import com.technocorp.ericpinto.rentms.controller.RentController;
+import com.technocorp.ericpinto.rentms.model.Film;
+import com.technocorp.ericpinto.rentms.model.Rent;
+import com.technocorp.ericpinto.rentms.service.RentService;
+import com.technocorp.ericpinto.rentms.model.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class RentControllerTests {
+class RentControllerTests {
 
     @Mock
     RentService rentService;
@@ -56,7 +58,7 @@ public class RentControllerTests {
         when(rentService.findById(rent.getId())).thenReturn(rent);
         var stubActual = rentController.findById(rent.getId());
 
-        assertEquals(rent, stubActual);
+        Assertions.assertEquals(rent, stubActual);
     }
 
 
@@ -66,7 +68,7 @@ public class RentControllerTests {
         when(rentService.create(rent, film.getEpisodeId())).thenReturn(rent);
         var stubActual = rentController.create(rent, film.getEpisodeId());
 
-        assertEquals(rent, stubActual);
+        Assertions.assertEquals(rent, stubActual);
     }
 
     @Test
@@ -77,7 +79,7 @@ public class RentControllerTests {
 
         var stubActual = rentController.update(rent.getId(), rent, film.getEpisodeId());
 
-        assertEquals(rent, stubActual);
+        Assertions.assertEquals(rent, stubActual);
     }
 
     @Test

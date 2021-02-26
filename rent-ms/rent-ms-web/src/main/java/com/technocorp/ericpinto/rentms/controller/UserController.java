@@ -1,14 +1,13 @@
 package com.technocorp.ericpinto.rentms.controller;
 
-import com.technocorp.ericpinto.rentms.controller.model.User;
-import com.technocorp.ericpinto.rentms.controller.service.UserService;
+import com.technocorp.ericpinto.rentms.model.User;
+import com.technocorp.ericpinto.rentms.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

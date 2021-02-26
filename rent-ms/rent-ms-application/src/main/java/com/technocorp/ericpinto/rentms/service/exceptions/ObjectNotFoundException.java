@@ -1,4 +1,4 @@
-package com.technocorp.ericpinto.rentms.controller.service.exceptions;
+package com.technocorp.ericpinto.rentms.service.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 

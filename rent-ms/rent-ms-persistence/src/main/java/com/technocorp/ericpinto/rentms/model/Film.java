@@ -1,4 +1,4 @@
-package com.technocorp.ericpinto.rentms.controller.model;
+package com.technocorp.ericpinto.rentms.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,6 +1,5 @@
-package com.technocorp.ericpinto.rentms.controller;
+package com.technocorp.ericpinto.rentms;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

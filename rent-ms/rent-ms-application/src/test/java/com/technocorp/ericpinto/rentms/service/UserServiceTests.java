@@ -1,8 +1,8 @@
-package com.technocorp.ericpinto.rentms.controller.service;
+package com.technocorp.ericpinto.rentms.service;
 
-import com.technocorp.ericpinto.rentms.controller.model.User;
-import com.technocorp.ericpinto.rentms.controller.service.exceptions.ObjectNotFoundException;
-import com.technocorp.ericpinto.rentms.controller.repository.UserRepository;
+import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundException;
+import com.technocorp.ericpinto.rentms.model.User;
+import com.technocorp.ericpinto.rentms.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

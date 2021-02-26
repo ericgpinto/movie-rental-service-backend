@@ -60,7 +60,8 @@ sonarqube {
 		property 'sonar.password', 'eric12345'
 		property 'sonar.coverage.exclusions', [
 				'rent-ms-configuration/src/main/java/com/technocorp/ericpinto/rentms/config/SwaggerConfig.java',
-				'src/main/java/com/technocorp/ericpinto/rentms/RentMsApplication.java'
+				'src/main/java/com/technocorp/ericpinto/rentms/RentMsApplication.java',
+				'rent-ms-persistence/src/main/java/com/technocorp/ericpinto/rentms/controller/model/FilmResponse.java'
 		]
 	}
 

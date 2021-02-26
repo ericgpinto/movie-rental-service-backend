@@ -1,6 +1,6 @@
-package com.technocorp.ericpinto.rentms.controller.repository;
+package com.technocorp.ericpinto.rentms.repository;
 
-import com.technocorp.ericpinto.rentms.controller.model.User;
+import com.technocorp.ericpinto.rentms.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

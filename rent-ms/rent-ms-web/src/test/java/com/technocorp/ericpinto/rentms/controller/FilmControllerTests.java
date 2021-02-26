@@ -1,8 +1,10 @@
 package com.technocorp.ericpinto.rentms.controller;
 
-import com.technocorp.ericpinto.rentms.controller.model.Film;
-import com.technocorp.ericpinto.rentms.controller.model.FilmResponse;
-import com.technocorp.ericpinto.rentms.controller.service.FilmService;
+import com.technocorp.ericpinto.rentms.controller.FilmController;
+import com.technocorp.ericpinto.rentms.model.Film;
+import com.technocorp.ericpinto.rentms.model.FilmResponse;
+import com.technocorp.ericpinto.rentms.service.FilmService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +41,7 @@ class FilmControllerTests {
         when(filmService.findAll()).thenReturn(filmResponse);
         var stubActual = filmController.findAllFilms();
 
-        assertEquals(filmResponse, stubActual);
+        Assertions.assertEquals(filmResponse, stubActual);
     }
 
     @Test
@@ -49,6 +51,6 @@ class FilmControllerTests {
         when(filmService.getFilmById(film.getEpisodeId())).thenReturn(film);
         var stubActual = filmController.getFilmById(film.getEpisodeId());
 
-        assertEquals(film, stubActual);
+        Assertions.assertEquals(film, stubActual);
     }
 }

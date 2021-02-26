@@ -1,9 +1,9 @@
-package com.technocorp.ericpinto.rentms.controller.service;
+package com.technocorp.ericpinto.rentms.service;
 
-import com.technocorp.ericpinto.rentms.controller.model.Film;
-import com.technocorp.ericpinto.rentms.controller.model.Rent;
-import com.technocorp.ericpinto.rentms.controller.model.User;
-import com.technocorp.ericpinto.rentms.controller.repository.RentRepository;
+import com.technocorp.ericpinto.rentms.model.Film;
+import com.technocorp.ericpinto.rentms.model.Rent;
+import com.technocorp.ericpinto.rentms.model.User;
+import com.technocorp.ericpinto.rentms.repository.RentRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -29,7 +29,6 @@ class RentServiceTests {
 
     @InjectMocks
     RentService rentService;
-
 
     User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com").build();
 
@@ -58,10 +57,9 @@ class RentServiceTests {
 //    void shouldCreateARent(){
 //        when(rentRepository.insert(rent)).thenReturn(rent);
 //
-//        var response = rentService.create(rent, 6);
-//        var stubExpect = rent;
+//        var response =  rentService.create(rent, rent.getFilm().getEpisodeId());
 //
-//        assertEquals(stubExpect, response);
+//        assertEquals(rent, response);
 //    }
 
     @Test

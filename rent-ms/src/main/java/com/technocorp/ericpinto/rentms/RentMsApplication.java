@@ -1,4 +1,4 @@
-package com.technocorp.ericpinto.rentms.controller;
+package com.technocorp.ericpinto.rentms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

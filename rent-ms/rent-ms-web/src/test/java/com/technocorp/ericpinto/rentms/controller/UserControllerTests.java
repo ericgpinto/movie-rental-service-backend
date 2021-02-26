@@ -1,8 +1,9 @@
 package com.technocorp.ericpinto.rentms.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.technocorp.ericpinto.rentms.controller.model.User;
-import com.technocorp.ericpinto.rentms.controller.service.UserService;
+import com.technocorp.ericpinto.rentms.controller.UserController;
+import com.technocorp.ericpinto.rentms.model.User;
+import com.technocorp.ericpinto.rentms.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

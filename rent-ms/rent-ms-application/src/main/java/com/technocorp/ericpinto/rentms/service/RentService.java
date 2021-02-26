@@ -1,8 +1,8 @@
-package com.technocorp.ericpinto.rentms.controller.service;
+package com.technocorp.ericpinto.rentms.service;
 
-import com.technocorp.ericpinto.rentms.controller.model.Rent;
-import com.technocorp.ericpinto.rentms.controller.repository.RentRepository;
-import com.technocorp.ericpinto.rentms.controller.service.exceptions.ObjectNotFoundException;
+import com.technocorp.ericpinto.rentms.model.Rent;
+import com.technocorp.ericpinto.rentms.repository.RentRepository;
+import com.technocorp.ericpinto.rentms.service.exceptions.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

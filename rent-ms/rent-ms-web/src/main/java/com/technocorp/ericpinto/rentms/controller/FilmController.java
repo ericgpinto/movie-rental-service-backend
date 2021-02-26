@@ -1,15 +1,14 @@
 package com.technocorp.ericpinto.rentms.controller;
 
-import com.technocorp.ericpinto.rentms.controller.model.Film;
-import com.technocorp.ericpinto.rentms.controller.model.FilmResponse;
-import com.technocorp.ericpinto.rentms.controller.service.FilmService;
+import com.technocorp.ericpinto.rentms.model.Film;
+import com.technocorp.ericpinto.rentms.model.FilmResponse;
+import com.technocorp.ericpinto.rentms.service.FilmService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

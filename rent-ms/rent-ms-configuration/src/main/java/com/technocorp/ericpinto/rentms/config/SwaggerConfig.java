@@ -1,4 +1,4 @@
-package com.technocorp.ericpinto.rentms.controller.config;
+package com.technocorp.ericpinto.rentms.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

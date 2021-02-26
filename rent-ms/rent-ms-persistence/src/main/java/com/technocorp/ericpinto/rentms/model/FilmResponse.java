@@ -1,4 +1,4 @@
-package com.technocorp.ericpinto.rentms.controller.model;
+package com.technocorp.ericpinto.rentms.model;
 
 import lombok.Builder;
 import lombok.Data;

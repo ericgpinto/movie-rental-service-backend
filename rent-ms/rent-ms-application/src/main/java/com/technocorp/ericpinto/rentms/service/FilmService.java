@@ -1,7 +1,7 @@
-package com.technocorp.ericpinto.rentms.controller.service;
+package com.technocorp.ericpinto.rentms.service;
 
-import com.technocorp.ericpinto.rentms.controller.model.Film;
-import com.technocorp.ericpinto.rentms.controller.model.FilmResponse;
+import com.technocorp.ericpinto.rentms.model.Film;
+import com.technocorp.ericpinto.rentms.model.FilmResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
