@@ -1,5 +1,11 @@
+plugins{
+    id 'jacoco'
+}
+
+
 dependencies {
     implementation project(':rent-ms-application')
     implementation project(':rent-ms-persistence')
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.3'
 }

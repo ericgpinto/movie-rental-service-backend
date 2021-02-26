@@ -61,7 +61,7 @@ sonarqube {
 		property 'sonar.coverage.exclusions', [
 				'rent-ms-configuration/src/main/java/com/technocorp/ericpinto/rentms/config/SwaggerConfig.java',
 				'src/main/java/com/technocorp/ericpinto/rentms/RentMsApplication.java',
-				'rent-ms-persistence/src/main/java/com/technocorp/ericpinto/rentms/controller/model/FilmResponse.java'
+				'rent-ms-persistence/src/main/java/com/technocorp/ericpinto/rentms/model/FilmResponse.java'
 		]
 	}
 

@@ -27,6 +27,9 @@ class RentServiceTests {
     @Mock
     RentRepository rentRepository;
 
+    @Mock
+    FilmService filmService;
+
     @InjectMocks
     RentService rentService;
 
@@ -52,15 +55,15 @@ class RentServiceTests {
         assertEquals(1, listRents.size(), "find all should return one rent");
     }
 
-//    @Test
-//    @DisplayName("Should be create a Rent")
-//    void shouldCreateARent(){
-//        when(rentRepository.insert(rent)).thenReturn(rent);
-//
-//        var response =  rentService.create(rent, rent.getFilm().getEpisodeId());
-//
-//        assertEquals(rent, response);
-//    }
+    @Test
+    @DisplayName("Should be create a Rent")
+    void shouldCreateARent(){
+        when(rentRepository.insert(rent)).thenReturn(rent);
+
+        var response =  rentService.create(rent, 6);
+
+        assertEquals(rent, response);
+    }
 
     @Test
     @DisplayName("Test findById success")
@@ -73,22 +76,16 @@ class RentServiceTests {
         Assertions.assertEquals(stubExpect, response);
     }
 
-//    @Test
-//    @DisplayName("Shold be update a user")
-//    void shouldUpdateUser(){
-//        User newUser = User.builder()
-//                .id("5fc7ba0ee7e48d20dc2fbf52")
-//                .name("Éric Pinto")
-//                .email("ericpinto@gmail.com").build();
-//
-//        when(rentRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(rent));
-//        when(rentRepository.save(rent)).thenReturn(rent);
-//
-//        var stubExpect = user;
-//        var response = rentService.udpated("5fc7ba0ee7e48d20dc2fbf52", newUser);
-//
-//        assertEquals(stubExpect, response);
-//    }
+    @Test
+    @DisplayName("Shold be update a user")
+    void shouldUpdateUser(){
+        when(rentRepository.findById(rent.getId())).thenReturn(Optional.ofNullable(rent));
+        when(rentRepository.save(rent)).thenReturn(rent);
+
+        var stubExpect = rentService.udpate(rent.getId(), rent, 6);
+
+        assertEquals(stubExpect, rent);
+    }
 
     @Test
     @DisplayName("Shold be delete a rent")
