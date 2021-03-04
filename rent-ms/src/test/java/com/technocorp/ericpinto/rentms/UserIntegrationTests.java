@@ -1,6 +1,7 @@
 package com.technocorp.ericpinto.rentms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.technocorp.ericpinto.rentms.controller.UserController;
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -10,23 +11,26 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@ContextConfiguration
 @AutoConfigureMockMvc
 class UserIntegrationTests {
+
+    private final String BASE_URL = "/rentapi/users";
 
     @MockBean
     UserRepository userRepository;
@@ -47,7 +51,7 @@ class UserIntegrationTests {
 
         when(userRepository.findAll()).thenReturn(listUsers);
 
-        mockMvc.perform(get("/rentapi/users")
+        mockMvc.perform(get(BASE_URL)
                 .accept(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isOk());
     }
@@ -56,20 +60,22 @@ class UserIntegrationTests {
     @DisplayName("Should return status 200 when find by id")
     void findUserById_shouldReturnStatusCode200() throws Exception {
 
-        when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.of(user));
 
-        mockMvc.perform(get("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52")
+        mockMvc.perform(get(BASE_URL + "/5fc7ba0ee7e48d20dc2fbf52")
                 .accept(MediaType.APPLICATION_JSON)).andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(user.getId())))
+                .andExpect(jsonPath("$.name", is(user.getName())))
+                .andExpect(jsonPath("$.email", is(user.getEmail())));
+
+        verify(userRepository, times(1)).findById(user.getId());
     }
 
     @Test
     @DisplayName("Should return status 404 when user not found")
     void findUserById_shouldReturnStatusCode404_WhenUserNotFound() throws Exception {
-
-        when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(user));
-
-        mockMvc.perform(get("/rentapi/users/4")
+        mockMvc.perform(get(BASE_URL + "/1")
                 .accept(MediaType.APPLICATION_JSON)).andDo(print())
                 .andExpect(status().isNotFound());
     }
@@ -80,33 +86,42 @@ class UserIntegrationTests {
 
         when(userRepository.insert(user)).thenReturn(user);
 
-        mockMvc.perform(post("/rentapi/users")
+        mockMvc.perform(post(BASE_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON)).andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", is(user.getId())))
+                .andExpect(jsonPath("$.name", is(user.getName())))
+                .andExpect(jsonPath("$.email", is(user.getEmail())));
+
+        verify(userRepository, times(1)).insert(any(User.class));
     }
 
     @Test
     @DisplayName("Should return status 200 when user updated")
     void updateUser_shouldReturnStatusCode200() throws Exception {
 
-        when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
 
-        mockMvc.perform(put("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52")
+        mockMvc.perform(put(BASE_URL + "/5fc7ba0ee7e48d20dc2fbf52")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user))
                 .accept(MediaType.APPLICATION_JSON)).andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(user.getId())));
+
     }
 
     @Test
-    @DisplayName("Should return 204 when user deleted")
-    void shouldReturn204_WhenDeleteUser() throws Exception {
+    @DisplayName("Should return status 204 when user deleted")
+    void deleteUser_shouldReturnStatusCode204() throws Exception {
         when(userRepository.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(Optional.ofNullable(user));
-        this.mockMvc.perform(delete("/rentapi/users/5fc7ba0ee7e48d20dc2fbf52"))
+        this.mockMvc.perform(delete(BASE_URL + "/5fc7ba0ee7e48d20dc2fbf52"))
                 .andExpect(status().isNoContent());
+
+        verify(userRepository, times(1)).deleteById("5fc7ba0ee7e48d20dc2fbf52");
     }
 
 }
