@@ -23,16 +23,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping(value = "")
-    @ApiOperation("Returns a list of users")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Returns success"),
-            @ApiResponse(code = 401, message = "Unauthorized")
-    })
-    public List<User> findAll(){
-        return userService.findAll();
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Creates a user")
@@ -43,6 +33,30 @@ public class UserController {
     })
     public User create(@Valid @RequestBody User user){
         return userService.create(user);
+    }
+
+    @GetMapping(value = "")
+    @ApiOperation("Returns a list of users")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns success"),
+            @ApiResponse(code = 401, message = "Unauthorized")
+    })
+    public List<User> findAll(){
+        return userService.findAll();
+    }
+
+    @GetMapping(value = "/emailSearch")
+    @ApiOperation("Returns a user by email")
+    public User findByEmail(@RequestParam(value = "email", defaultValue = "") String email){
+        email = URL.decodeParam(email);
+        return userService.findByEmail(email);
+    }
+
+    @GetMapping(value = "/searchMobileNumber")
+    @ApiOperation("Returns a user by mobile number")
+    public User findByMobileNumber(@RequestParam(value = "mobilenumber", defaultValue = "") String mobileNumber){
+        mobileNumber = URL.decodeParam(mobileNumber);
+        return userService.findByMobileNumber(mobileNumber);
     }
 
     @GetMapping(value = "/{id}")
@@ -96,9 +110,4 @@ public class UserController {
         return userService.udpated(id, user);
     }
 
-    @GetMapping(value = "/emailsearch")
-    public User findByEmail(@RequestParam(value = "email", defaultValue = "") String email){
-        email = URL.decodeParam(email);
-        return userService.findByEmail(email);
-    }
 }
