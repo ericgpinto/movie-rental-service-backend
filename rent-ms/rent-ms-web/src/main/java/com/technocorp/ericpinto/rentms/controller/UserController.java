@@ -1,5 +1,6 @@
 package com.technocorp.ericpinto.rentms.controller;
 
+import com.technocorp.ericpinto.rentms.controller.util.URL;
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.service.UserService;
 import io.swagger.annotations.Api;
@@ -93,5 +94,11 @@ public class UserController {
     })
     public User update(@PathVariable String id, @RequestBody User user){
         return userService.udpated(id, user);
+    }
+
+    @GetMapping(value = "/emailsearch")
+    public User findByEmail(@RequestParam(value = "email", defaultValue = "") String email){
+        email = URL.decodeParam(email);
+        return userService.findByEmail(email);
     }
 }
