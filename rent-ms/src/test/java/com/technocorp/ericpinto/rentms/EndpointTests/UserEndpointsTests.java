@@ -38,7 +38,9 @@ class UserEndpointsTests {
     User user = User.builder()
             .id("5fc7ba0ee7e48d20dc2fbf52")
             .name("Éric")
-            .email("eric@gmail.com").build();
+            .email("eric@gmail.com")
+            .mobileNumber("51992901094")
+            .build();
 
     @Test
     @DisplayName("Should be save a user")
@@ -93,6 +95,7 @@ class UserEndpointsTests {
         User newUser = User.builder()
                 .id("5fc7ba0ee7e48d20dc2fbf52")
                 .name("Éric Pinto")
+                .mobileNumber("51992901094")
                 .email("ericpinto@gmail.com").build();
 
         when(userService.findById("5fc7ba0ee7e48d20dc2fbf52")).thenReturn(user);

@@ -25,6 +25,9 @@ public class User {
     @ApiModelProperty(value = "Name of user")
     @NotNull @NotEmpty
     private String name;
+    @ApiModelProperty(value = "Mobile number of user")
+    @NotNull @NotEmpty
+    private String mobileNumber;
     @ApiModelProperty(value = "Email of user")
     @NotNull @NotEmpty
     private String email;

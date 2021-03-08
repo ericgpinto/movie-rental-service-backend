@@ -35,6 +35,7 @@ public class UserService {
 
         obj.setName(user.getName());
         obj.setEmail(user.getEmail());
+        obj.setMobileNumber(user.getMobileNumber());
 
         return userRepository.save(obj);
     }

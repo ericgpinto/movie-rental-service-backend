@@ -1,7 +1,6 @@
 package com.technocorp.ericpinto.rentms.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.technocorp.ericpinto.rentms.controller.UserController;
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.service.UserService;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +31,7 @@ class UserControllerTests {
     User user = User.builder()
             .id("5fc7ba0ee7e48d20dc2fbf52")
             .name("Éric")
+            .mobileNumber("51992901094")
             .email("eric@gmail.com").build();
 
     @Test

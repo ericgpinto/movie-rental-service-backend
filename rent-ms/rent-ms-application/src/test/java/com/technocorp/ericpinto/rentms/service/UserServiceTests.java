@@ -31,6 +31,7 @@ class UserServiceTests {
     User user = User.builder()
             .id("5fc7ba0ee7e48d20dc2fbf52")
             .name("Éric")
+            .mobileNumber("51992901094")
             .email("eric@gmail.com").build();
 
     @Test

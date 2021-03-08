@@ -1,7 +1,6 @@
 package com.technocorp.ericpinto.rentms;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.technocorp.ericpinto.rentms.controller.UserController;
 import com.technocorp.ericpinto.rentms.model.User;
 import com.technocorp.ericpinto.rentms.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +37,7 @@ class UserIntegrationTests {
     @Autowired
     MockMvc mockMvc;
 
-    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com")
+    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com").mobileNumber("51992901094")
             .build();
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -67,7 +66,8 @@ class UserIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(user.getId())))
                 .andExpect(jsonPath("$.name", is(user.getName())))
-                .andExpect(jsonPath("$.email", is(user.getEmail())));
+                .andExpect(jsonPath("$.email", is(user.getEmail())))
+                .andExpect(jsonPath("$.mobileNumber", is(user.getMobileNumber())));
 
         verify(userRepository, times(1)).findById(user.getId());
     }
@@ -93,7 +93,8 @@ class UserIntegrationTests {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(user.getId())))
                 .andExpect(jsonPath("$.name", is(user.getName())))
-                .andExpect(jsonPath("$.email", is(user.getEmail())));
+                .andExpect(jsonPath("$.email", is(user.getEmail())))
+                .andExpect(jsonPath("$.mobileNumber", is(user.getMobileNumber())));
 
         verify(userRepository, times(1)).insert(any(User.class));
     }

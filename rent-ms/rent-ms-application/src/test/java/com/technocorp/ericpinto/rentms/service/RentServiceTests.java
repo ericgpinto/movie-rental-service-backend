@@ -33,7 +33,8 @@ class RentServiceTests {
     @InjectMocks
     RentService rentService;
 
-    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com").build();
+    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com")
+            .mobileNumber("51992901094").build();
 
     Film film = Film.builder().title("Revenge of the Sith").episodeId(6).director("George Lucas").build();
 

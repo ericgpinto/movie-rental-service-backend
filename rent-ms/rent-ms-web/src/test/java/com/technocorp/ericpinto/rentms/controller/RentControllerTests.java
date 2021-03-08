@@ -1,10 +1,9 @@
 package com.technocorp.ericpinto.rentms.controller;
 
-import com.technocorp.ericpinto.rentms.controller.RentController;
 import com.technocorp.ericpinto.rentms.model.Film;
 import com.technocorp.ericpinto.rentms.model.Rent;
-import com.technocorp.ericpinto.rentms.service.RentService;
 import com.technocorp.ericpinto.rentms.model.User;
+import com.technocorp.ericpinto.rentms.service.RentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +28,7 @@ class RentControllerTests {
     @InjectMocks
     RentController rentController;
 
-    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com").build();
+    User user = User.builder().id("5fc7ba0ee7e48d20dc2fbf52").name("Éric").email("eric@gmail.com").mobileNumber("51992901094").build();
 
     Film film = Film.builder().title("Revenge of the Sith").episodeId(6).director("George Lucas").build();
 
