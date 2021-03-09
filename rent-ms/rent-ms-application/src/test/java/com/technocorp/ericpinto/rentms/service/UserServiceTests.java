@@ -71,6 +71,18 @@ class UserServiceTests {
     }
 
     @Test
+    @DisplayName("Test find by email success")
+    void shouldReturnAUser_whenFindByEmail(){
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(user);
+
+        var response = userService.findByEmail(user.getEmail());
+        var stubExpect = user;
+
+        Assertions.assertEquals(stubExpect, response);
+
+    }
+
+    @Test
     @DisplayName("ShoUld be return a exception when find by id")
     void shouldReturnAException_whenFindById(){
         assertThrows(ObjectNotFoundException.class, () -> userService.findById("5fc7ba0ee7e48d20dc2fbf52"));
