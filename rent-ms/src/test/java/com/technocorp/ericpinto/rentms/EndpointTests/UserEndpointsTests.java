@@ -89,6 +89,20 @@ class UserEndpointsTests {
     }
 
     @Test
+    @DisplayName("Should be return a user by email")
+    void shouldReturn200_WhenFindUserByEmail() throws Exception {
+        when(userService.findByEmail(user.getEmail())).thenReturn(user);
+
+        this.mockMvc.perform(get("/rentapi/users/emailsearch?email=ericgrandopinto@gmail.com")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user))
+        ).andExpect(status().isOk())
+                .andDo(document("{methodName}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+    @Test
     @DisplayName("Should be update a user")
     void shouldReturn200_WhenUpdateUser() throws Exception {
 
