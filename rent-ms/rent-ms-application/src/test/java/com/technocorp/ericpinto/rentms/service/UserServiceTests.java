@@ -79,7 +79,17 @@ class UserServiceTests {
         var stubExpect = user;
 
         Assertions.assertEquals(stubExpect, response);
+    }
 
+    @Test
+    @DisplayName("Test find by mobile number success")
+    void shouldReturnAUser_whenFindByMobileNumber(){
+        when(userRepository.findByMobileNumber(user.getMobileNumber())).thenReturn(user);
+
+        var response = userService.findByMobileNumber(user.getMobileNumber());
+        var stubExpect = user;
+
+        Assertions.assertEquals(stubExpect, response);
     }
 
     @Test
