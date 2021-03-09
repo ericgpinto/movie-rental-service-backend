@@ -67,8 +67,17 @@ class UserControllerTests {
         assertEquals(user, stubActual);
     }
 
+    @Test
+    @DisplayName("Should return a user by mobile number")
+    void whenFindByMobileNumber_shouldReturnTheUserFounded() {
 
-        @Test
+        when(userService.findByMobileNumber(user.getMobileNumber())).thenReturn(user);
+        var stubActual = userController.findByMobileNumber(user.getMobileNumber());
+
+        assertEquals(user, stubActual);
+    }
+
+    @Test
     @DisplayName("Should return the saved user")
     void whenCreate_shouldReturnTheUserCreated() {
         when(userService.create(user)).thenReturn(user);
