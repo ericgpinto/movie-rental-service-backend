@@ -63,7 +63,8 @@ sonarqube {
 				'src/main/java/com/technocorp/ericpinto/rentms/RentMsApplication.java',
 				'rent-ms-persistence/src/main/java/com/technocorp/ericpinto/rentms/model/FilmResponse.java',
 				'rent-ms-web/src/main/java/com/technocorp/ericpinto/rentms/controller/exception/ControllerExceptionHandler.java',
-				'rent-ms-web/src/main/java/com/technocorp/ericpinto/rentms/controller/exception/StandartError.java'
+				'rent-ms-web/src/main/java/com/technocorp/ericpinto/rentms/controller/exception/StandartError.java',
+				'rent-ms-web/src/main/java/com/technocorp/ericpinto/rentms/controller/util/URL.java'
 		]
 	}
 
