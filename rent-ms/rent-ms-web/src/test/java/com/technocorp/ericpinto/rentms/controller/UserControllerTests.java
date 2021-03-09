@@ -57,8 +57,18 @@ class UserControllerTests {
         assertEquals(user, stubActual);
     }
 
-
     @Test
+    @DisplayName("Should return a user by email")
+    void whenFindByEmail_shouldReturnTheUserFounded() {
+
+        when(userService.findByEmail(user.getEmail())).thenReturn(user);
+        var stubActual = userController.findByEmail(user.getEmail());
+
+        assertEquals(user, stubActual);
+    }
+
+
+        @Test
     @DisplayName("Should return the saved user")
     void whenCreate_shouldReturnTheUserCreated() {
         when(userService.create(user)).thenReturn(user);
