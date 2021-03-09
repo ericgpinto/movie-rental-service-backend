@@ -103,6 +103,20 @@ class UserEndpointsTests {
     }
 
     @Test
+    @DisplayName("Should be return a user by mobile number")
+    void shouldReturn200_WhenFindUserByMobileNumber() throws Exception {
+        when(userService.findByMobileNumber(user.getMobileNumber())).thenReturn(user);
+
+        this.mockMvc.perform(get("/rentapi/users/mobile-number-search?mobilenumber=51992901094")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user))
+        ).andExpect(status().isOk())
+                .andDo(document("{methodName}",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+    @Test
     @DisplayName("Should be update a user")
     void shouldReturn200_WhenUpdateUser() throws Exception {
 
