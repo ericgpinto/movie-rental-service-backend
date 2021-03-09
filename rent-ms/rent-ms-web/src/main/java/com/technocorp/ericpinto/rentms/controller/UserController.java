@@ -45,14 +45,14 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping(value = "/emailSearch")
+    @GetMapping(value = "/email-search")
     @ApiOperation("Returns a user by email")
     public User findByEmail(@RequestParam(value = "email", defaultValue = "") String email){
         email = URL.decodeParam(email);
         return userService.findByEmail(email);
     }
 
-    @GetMapping(value = "/searchMobileNumber")
+    @GetMapping(value = "/mobile-number-search")
     @ApiOperation("Returns a user by mobile number")
     public User findByMobileNumber(@RequestParam(value = "mobilenumber", defaultValue = "") String mobileNumber){
         mobileNumber = URL.decodeParam(mobileNumber);
